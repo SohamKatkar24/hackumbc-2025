@@ -31,10 +31,10 @@ fake = Faker(['en_US'])
 OUTPUT_DIR = "umbc_data"
 
 # Data Size Configuration
-NUM_STUDENTS = 1000       # Number of student nodes
-NUM_COURSES = 200         # Number of course nodes
-NUM_FACULTY = 50          # Number of faculty nodes
-NUM_DEGREES = 15          # Number of degree programs
+NUM_STUDENTS = 500        # Reduced number of students for more focused data
+NUM_COURSES = 100         # Reduced number of courses for two departments
+NUM_FACULTY = 30          # Reduced number of faculty for two departments
+NUM_DEGREES = 4           # Two degrees per department (BS and BA)
 TERMS_TO_GENERATE = 12    # Number of academic terms to generate
 HISTORY_YEARS = 4         # Years of historical data
 
@@ -75,33 +75,18 @@ GRADE_DISTRIBUTION = {
     "W": 0.01  # Withdrawal
 }
 
-# The departments at UMBC
+# The departments at UMBC (focused on CS and Biology)
 DEPARTMENTS = [
     "Computer Science",
-    "Information Systems",
-    "Mathematics",
-    "Physics",
-    "Chemistry",
-    "Biology",
-    "Psychology",
-    "English",
-    "History",
-    "Political Science",
-    "Sociology",
-    "Economics",
-    "Visual Arts",
-    "Music",
-    "Engineering"
+    "Biology"
 ]
 
-# Course levels and their weights
+# Course levels and their weights (adjusted for CS and Biology focus)
 COURSE_LEVELS = {
-    100: 0.3,  # Freshman
-    200: 0.3,  # Sophomore
-    300: 0.25, # Junior
-    400: 0.15, # Senior
-    600: 0.05, # Graduate
-    700: 0.05  # Graduate
+    100: 0.25,  # Freshman
+    200: 0.30,  # Sophomore
+    300: 0.30,  # Junior
+    400: 0.15   # Senior
 }
 
 # =============================================================================
@@ -142,87 +127,42 @@ def generate_course_name(department, level):
     """
     dept_names = {
         "Computer Science": [
+            # Core CS courses
             "Introduction to Programming", "Data Structures", 
             "Algorithms", "Operating Systems", "Computer Architecture",
-            "Artificial Intelligence", "Machine Learning", "Database Systems",
-            "Computer Networks", "Software Engineering", "Computer Graphics",
-            "Cybersecurity", "Web Development", "Mobile Computing"
-        ],
-        "Information Systems": [
-            "Information Systems Fundamentals", "Database Management",
-            "System Analysis and Design", "IT Infrastructure", "Business Intelligence",
-            "Enterprise Architecture", "Knowledge Management", "Data Analytics",
-            "IT Project Management", "Information Security", "Decision Support Systems"
-        ],
-        "Mathematics": [
-            "Calculus I", "Calculus II", "Calculus III", "Linear Algebra",
-            "Differential Equations", "Abstract Algebra", "Real Analysis",
-            "Discrete Mathematics", "Probability Theory", "Statistics",
-            "Number Theory", "Numerical Analysis", "Graph Theory"
-        ],
-        "Physics": [
-            "General Physics I", "General Physics II", "Modern Physics",
-            "Classical Mechanics", "Electromagnetism", "Thermodynamics",
-            "Quantum Mechanics", "Nuclear Physics", "Solid State Physics",
-            "Optics", "Astrophysics", "Relativity"
-        ],
-        "Chemistry": [
-            "General Chemistry", "Organic Chemistry", "Inorganic Chemistry",
-            "Analytical Chemistry", "Physical Chemistry", "Biochemistry",
-            "Environmental Chemistry", "Chemical Kinetics", "Spectroscopy",
-            "Medicinal Chemistry"
+            "Software Engineering", "Database Systems", "Computer Networks",
+            "Programming Languages", "Theory of Computation",
+            
+            # Specialized CS courses
+            "Artificial Intelligence", "Machine Learning", "Computer Graphics",
+            "Cybersecurity", "Web Development", "Mobile Computing",
+            "Cloud Computing", "Distributed Systems", "Compiler Design",
+            "Computer Vision", "Natural Language Processing",
+            
+            # CS Electives
+            "Game Development", "Blockchain Technology", "IoT Development",
+            "Robotics", "Data Science", "Big Data Analytics",
+            "Human-Computer Interaction", "Software Testing", "DevOps",
+            "Quantum Computing", "Edge Computing"
         ],
         "Biology": [
+            # Core Biology courses
             "General Biology", "Cell Biology", "Molecular Biology",
             "Genetics", "Ecology", "Evolution", "Microbiology",
-            "Anatomy and Physiology", "Botany", "Zoology",
-            "Marine Biology", "Immunology"
-        ],
-        "Psychology": [
-            "Introduction to Psychology", "Developmental Psychology",
-            "Cognitive Psychology", "Social Psychology", "Abnormal Psychology",
-            "Clinical Psychology", "Educational Psychology", "Health Psychology",
-            "Personality Psychology", "Neuropsychology"
-        ],
-        "English": [
-            "Composition", "World Literature", "American Literature",
-            "British Literature", "Creative Writing", "Technical Writing",
-            "Shakespeare", "Poetry", "Drama", "Fiction"
-        ],
-        "History": [
-            "World History", "American History", "European History",
-            "Asian History", "African History", "Latin American History",
-            "Medieval History", "Renaissance History", "Modern History"
-        ],
-        "Political Science": [
-            "Introduction to Political Science", "American Government",
-            "International Relations", "Comparative Politics", "Political Theory",
-            "Public Policy", "Constitutional Law", "Foreign Policy"
-        ],
-        "Sociology": [
-            "Introduction to Sociology", "Social Problems", "Social Theory",
-            "Urban Sociology", "Rural Sociology", "Medical Sociology",
-            "Criminology", "Race and Ethnicity", "Gender Studies"
-        ],
-        "Economics": [
-            "Microeconomics", "Macroeconomics", "International Economics",
-            "Development Economics", "Labor Economics", "Monetary Economics",
-            "Environmental Economics", "Health Economics", "Public Economics"
-        ],
-        "Visual Arts": [
-            "Drawing", "Painting", "Sculpture", "Photography",
-            "Digital Art", "Graphic Design", "Art History",
-            "Printmaking", "Ceramics", "Animation"
-        ],
-        "Music": [
-            "Music Theory", "Music History", "Music Appreciation",
-            "Applied Music", "Music Composition", "Ensemble",
-            "Conducting", "Ethnomusicology", "Music Technology"
-        ],
-        "Engineering": [
-            "Engineering Fundamentals", "Mechanics", "Electrical Circuits",
-            "Thermodynamics", "Fluid Mechanics", "Control Systems",
-            "Robotics", "Materials Science", "Structural Analysis"
+            "Anatomy and Physiology", "Biochemistry", "Cell Physiology",
+            "Developmental Biology", "Immunology",
+            
+            # Specialized Biology courses
+            "Neurobiology", "Cancer Biology", "Plant Biology",
+            "Animal Behavior", "Marine Biology", "Conservation Biology",
+            "Population Genetics", "Molecular Genetics", "Bioinformatics",
+            "Systems Biology", "Stem Cell Biology",
+            
+            # Biology Electives
+            "Environmental Biology", "Tropical Biology", "Behavioral Ecology",
+            "Comparative Anatomy", "Virology", "Parasitology",
+            "Biotechnology", "Genomics", "Proteomics", "Metabolomics",
+            "Synthetic Biology", "Computational Biology"
         ]
     }
     
@@ -238,11 +178,8 @@ def generate_course_name(department, level):
     elif level < 400:
         suffixes = [" I", " Analysis", " Methods", " Applications", " Theory"]
         return f"{random.choice(names)}{random.choice(suffixes)}"
-    elif level < 500:
-        suffixes = [" II", " Advanced", " Seminar", " Research", " Project"]
-        return f"{random.choice(names)}{random.choice(suffixes)}"
     else:
-        prefixes = ["Advanced ", "Graduate ", "Research in ", "Topics in "]
+        prefixes = ["Advanced ", "Topics in ", "Special Topics in "]
         return f"{random.choice(prefixes)}{random.choice(names)}"
 
 def get_term_by_date(date):
@@ -450,7 +387,7 @@ def generate_faculty():
 
 def generate_courses(faculty_by_dept):
     """
-    Generate course data.
+    Generate course data for CS and Biology departments.
     """
     courses = []
     dept_courses = defaultdict(list)
@@ -458,7 +395,7 @@ def generate_courses(faculty_by_dept):
     # Generate courses for each department
     for dept in DEPARTMENTS:
         # Number of courses for this department
-        dept_course_count = max(5, int(NUM_COURSES * (1 / len(DEPARTMENTS))))
+        dept_course_count = max(25, int(NUM_COURSES * (1 / len(DEPARTMENTS))))
         
         for i in range(dept_course_count):
             # Pick a course level
@@ -473,7 +410,7 @@ def generate_courses(faculty_by_dept):
                 
             course_name = generate_course_name(dept, level)
             
-            # Generate course difficulty
+            # Generate course difficulty (adjusted for CS and Biology)
             avg_difficulty = weighted_choice(COURSE_DIFFICULTY_DISTRIBUTION)
             
             # Generate time commitment (hours per week)
@@ -507,12 +444,25 @@ def generate_courses(faculty_by_dept):
                 tags.append("Advanced")
                 
             # Add specific topic tags based on course name
-            topic_keywords = [
-                "Programming", "Data", "Theory", "Analysis", "Design", 
-                "Research", "Applications", "Methods", "Systems", "Project"
-            ]
+            topic_keywords = {
+                "Computer Science": [
+                    "Programming", "Data", "Theory", "Analysis", "Design", 
+                    "Research", "Applications", "Methods", "Systems", "Project",
+                    "AI", "ML", "Security", "Web", "Mobile", "Cloud",
+                    "Distributed", "Compiler", "Vision", "NLP", "Game",
+                    "Blockchain", "IoT", "Robotics", "Data Science", "HCI"
+                ],
+                "Biology": [
+                    "Cell", "Molecular", "Genetics", "Ecology", "Evolution",
+                    "Micro", "Anatomy", "Physiology", "Biochemistry", "Development",
+                    "Neuro", "Cancer", "Plant", "Animal", "Marine", "Conservation",
+                    "Population", "Bioinformatics", "Systems", "Stem Cell",
+                    "Environmental", "Tropical", "Behavioral", "Comparative",
+                    "Virology", "Parasitology", "Biotech", "Genomics"
+                ]
+            }
             
-            for keyword in topic_keywords:
+            for keyword in topic_keywords.get(dept, []):
                 if keyword.lower() in course_name.lower():
                     tags.append(keyword)
                     
@@ -552,176 +502,156 @@ def generate_courses(faculty_by_dept):
             courses.append(course)
             dept_courses[dept].append(course)
     
-    # If we need more courses to meet NUM_COURSES, add more
-    while len(courses) < NUM_COURSES:
-        dept = random.choice(DEPARTMENTS)
-        level = weighted_choice(COURSE_LEVELS)
-        
-        course_id = generate_course_id(dept, level)
-        while any(c["id"] == course_id for c in courses):
-            course_id = f"{course_id}-{random.randint(1, 9)}"
-            
-        course_name = generate_course_name(dept, level)
-        
-        avg_difficulty = weighted_choice(COURSE_DIFFICULTY_DISTRIBUTION)
-        avg_time_commitment = level // 100 + avg_difficulty + random.randint(1, 3)
-        
-        course = {
-            "id": course_id,
-            "name": course_name,
-            "department": dept,
-            "credits": 3,
-            "level": level,
-            "avgDifficulty": avg_difficulty,
-            "avgTimeCommitment": avg_time_commitment,
-            "termAvailability": ["Fall", "Spring"],
-            "instructionModes": ["In-person"],
-            "tags": [dept, f"Level-{level//100}"]
-        }
-        
-        courses.append(course)
-        dept_courses[dept].append(course)
-    
     return courses, dept_courses
 
 def generate_degrees(dept_courses):
     """
-    Generate degree programs.
+    Generate degree programs for CS and Biology.
     """
     degrees = []
     requirement_groups = []
     
-    for i in range(NUM_DEGREES):
-        # Randomly select a department
-        dept = random.choice(DEPARTMENTS)
-        
-        # Generate degree information
-        degree_types = {
-            "Bachelor of Science": 0.4,
-            "Bachelor of Arts": 0.3,
-            "Master of Science": 0.2,
-            "Master of Arts": 0.1
-        }
-        
-        degree_type = weighted_choice(degree_types)
-        prefix = "BS" if degree_type == "Bachelor of Science" else \
-                "BA" if degree_type == "Bachelor of Arts" else \
-                "MS" if degree_type == "Master of Science" else "MA"
-                
-        degree_id = f"{prefix}-{dept.replace(' ', '')}-{i+1}"
-        degree_name = f"{degree_type} in {dept}"
-        
-        # Set credit requirements based on degree type
-        if degree_type.startswith("Bachelor"):
-            total_credits = 120
-            core_credits = random.randint(60, 80)
-        else:  # Master's
-            total_credits = 36
-            core_credits = random.randint(24, 30)
+    # Define degree types for each department
+    degree_configs = {
+        "Computer Science": [
+            {
+                "type": "Bachelor of Science",
+                "prefix": "BS",
+                "total_credits": 120,
+                "core_credits": 75,
+                "elective_credits": 45
+            },
+            {
+                "type": "Bachelor of Arts",
+                "prefix": "BA",
+                "total_credits": 120,
+                "core_credits": 60,
+                "elective_credits": 60
+            }
+        ],
+        "Biology": [
+            {
+                "type": "Bachelor of Science",
+                "prefix": "BS",
+                "total_credits": 120,
+                "core_credits": 80,
+                "elective_credits": 40
+            },
+            {
+                "type": "Bachelor of Arts",
+                "prefix": "BA",
+                "total_credits": 120,
+                "core_credits": 65,
+                "elective_credits": 55
+            }
+        ]
+    }
+    
+    for dept, configs in degree_configs.items():
+        for i, config in enumerate(configs):
+            degree_id = f"{config['prefix']}-{dept.replace(' ', '')}-{i+1}"
+            degree_name = f"{config['type']} in {dept}"
             
-        elective_credits = total_credits - core_credits
-        
-        degree = {
-            "id": degree_id,
-            "name": degree_name,
-            "department": dept,
-            "type": degree_type.split()[0],  # "Bachelor" or "Master"
-            "totalCreditsRequired": total_credits,
-            "coreCreditsRequired": core_credits,
-            "electiveCreditsRequired": elective_credits
-        }
-        
-        degrees.append(degree)
-        
-        # Generate requirement groups for this degree
-        num_requirement_groups = random.randint(3, 7)
-        available_courses = dept_courses[dept].copy()
-        
-        # Also include some courses from related departments
-        related_depts = random.sample(DEPARTMENTS, min(3, len(DEPARTMENTS)))
-        for related_dept in related_depts:
-            if related_dept != dept and related_dept in dept_courses:
-                available_courses.extend(random.sample(dept_courses[related_dept], 
-                                                       min(5, len(dept_courses[related_dept]))))
-        
-        # Core requirements group
-        core_req_id = f"REQ-CORE-{degree_id}"
-        core_req_name = f"Core {dept} Requirements"
-        
-        # Select core courses (higher level courses are more likely to be required)
-        core_courses = []
-        level_weights = {
-            100: 0.2,
-            200: 0.3,
-            300: 0.4,
-            400: 0.5,
-            600: 0.6,
-            700: 0.7
-        }
-        
-        # Sort by level and randomly select based on level weights
-        sorted_by_level = sorted(available_courses, key=lambda x: x["level"])
-        target_core_courses = min(20, len(available_courses) // 2)
-        
-        for course in sorted_by_level:
-            level = course["level"]
-            weight = level_weights.get(level, 0.3)
-            
-            if random.random() < weight and len(core_courses) < target_core_courses:
-                core_courses.append(course)
-        
-        # Calculate credits
-        core_min_credits = sum([c["credits"] for c in core_courses])
-        core_min_courses = len(core_courses)
-        
-        core_requirement = {
-            "id": core_req_id,
-            "name": core_req_name,
-            "description": f"Required courses for {degree_name}",
-            "minimumCourses": core_min_courses,
-            "minimumCredits": core_min_credits,
-            "degreeId": degree_id,
-            "courses": [c["id"] for c in core_courses]
-        }
-        
-        requirement_groups.append(core_requirement)
-        
-        # Remaining requirement groups (electives, concentrations, etc.)
-        remaining_courses = [c for c in available_courses if c not in core_courses]
-        
-        for j in range(num_requirement_groups - 1):
-            req_type = random.choice(["Elective", "Concentration", "Specialization", "Distribution"])
-            req_id = f"REQ-{req_type.upper()}-{j+1}-{degree_id}"
-            req_name = f"{dept} {req_type} Requirements - Group {j+1}"
-            
-            # Select a subset of remaining courses for this requirement
-            num_req_courses = random.randint(3, 8)
-            if remaining_courses:
-                req_courses = random.sample(remaining_courses, min(num_req_courses, len(remaining_courses)))
-            else:
-                req_courses = []
-                
-            # How many of these are required?
-            min_courses = random.randint(1, max(1, len(req_courses) - 1))
-            min_credits = min_courses * 3  # Approximate
-            
-            req_requirement = {
-                "id": req_id,
-                "name": req_name,
-                "description": f"{req_type} courses for {degree_name}",
-                "minimumCourses": min_courses,
-                "minimumCredits": min_credits,
-                "degreeId": degree_id,
-                "courses": [c["id"] for c in req_courses]
+            degree = {
+                "id": degree_id,
+                "name": degree_name,
+                "department": dept,
+                "type": config["type"].split()[0],  # "Bachelor"
+                "totalCreditsRequired": config["total_credits"],
+                "coreCreditsRequired": config["core_credits"],
+                "electiveCreditsRequired": config["elective_credits"]
             }
             
-            requirement_groups.append(req_requirement)
+            degrees.append(degree)
+            
+            # Generate requirement groups for this degree
+            available_courses = dept_courses[dept].copy()
+            
+            # Core requirements group
+            core_req_id = f"REQ-CORE-{degree_id}"
+            core_req_name = f"Core {dept} Requirements"
+            
+            # Select core courses (higher level courses are more likely to be required)
+            core_courses = []
+            level_weights = {
+                100: 0.2,
+                200: 0.3,
+                300: 0.4,
+                400: 0.5
+            }
+            
+            # Sort by level and randomly select based on level weights
+            sorted_by_level = sorted(available_courses, key=lambda x: x["level"])
+            target_core_courses = min(25, len(available_courses) // 2)
+            
+            for course in sorted_by_level:
+                level = course["level"]
+                weight = level_weights.get(level, 0.3)
+                
+                if random.random() < weight and len(core_courses) < target_core_courses:
+                    core_courses.append(course)
+            
+            # Calculate credits
+            core_min_credits = sum([c["credits"] for c in core_courses])
+            core_min_courses = len(core_courses)
+            
+            core_requirement = {
+                "id": core_req_id,
+                "name": core_req_name,
+                "description": f"Required courses for {degree_name}",
+                "minimumCourses": core_min_courses,
+                "minimumCredits": core_min_credits,
+                "degreeId": degree_id,
+                "courses": [c["id"] for c in core_courses]
+            }
+            
+            requirement_groups.append(core_requirement)
+            
+            # Remaining requirement groups (electives, concentrations, etc.)
+            remaining_courses = [c for c in available_courses if c not in core_courses]
+            
+            # Add some related department courses for electives
+            related_dept = "Biology" if dept == "Computer Science" else "Computer Science"
+            if related_dept in dept_courses:
+                remaining_courses.extend(random.sample(dept_courses[related_dept], 
+                                                   min(10, len(dept_courses[related_dept]))))
+            
+            # Create elective requirement groups
+            num_req_groups = 3  # Fixed number of requirement groups per degree
+            
+            for j in range(num_req_groups - 1):
+                req_type = random.choice(["Elective", "Concentration", "Specialization"])
+                req_id = f"REQ-{req_type.upper()}-{j+1}-{degree_id}"
+                req_name = f"{dept} {req_type} Requirements - Group {j+1}"
+                
+                # Select a subset of remaining courses for this requirement
+                num_req_courses = random.randint(3, 8)
+                if remaining_courses:
+                    req_courses = random.sample(remaining_courses, min(num_req_courses, len(remaining_courses)))
+                else:
+                    req_courses = []
+                    
+                # How many of these are required?
+                min_courses = random.randint(1, max(1, len(req_courses) - 1))
+                min_credits = min_courses * 3  # Approximate
+                
+                req_requirement = {
+                    "id": req_id,
+                    "name": req_name,
+                    "description": f"{req_type} courses for {degree_name}",
+                    "minimumCourses": min_courses,
+                    "minimumCredits": min_credits,
+                    "degreeId": degree_id,
+                    "courses": [c["id"] for c in req_courses]
+                }
+                
+                requirement_groups.append(req_requirement)
     
     return degrees, requirement_groups
 
 def generate_prerequisites(courses):
     """
-    Generate prerequisite relationships between courses.
+    Generate prerequisite relationships between courses for CS and Biology.
     """
     prerequisites = []
     
@@ -730,6 +660,62 @@ def generate_prerequisites(courses):
     for course in courses:
         by_dept_level[(course["department"], course["level"])].append(course)
     
+    # Define core prerequisite sequences for each department
+    core_sequences = {
+        "Computer Science": [
+            # Programming sequence
+            ["Introduction to Programming", "Data Structures", "Algorithms"],
+            # Systems sequence
+            ["Computer Architecture", "Operating Systems", "Computer Networks"],
+            # Theory sequence
+            ["Theory of Computation", "Compiler Design"],
+            # Software sequence
+            ["Software Engineering", "Database Systems"],
+            # AI/ML sequence
+            ["Artificial Intelligence", "Machine Learning", "Deep Learning"]
+        ],
+        "Biology": [
+            # Core sequence
+            ["General Biology", "Cell Biology", "Molecular Biology"],
+            # Genetics sequence
+            ["Genetics", "Molecular Genetics", "Population Genetics"],
+            # Physiology sequence
+            ["Anatomy and Physiology", "Cell Physiology", "Developmental Biology"],
+            # Ecology sequence
+            ["Ecology", "Evolution", "Conservation Biology"],
+            # Specialized sequences
+            ["Microbiology", "Immunology"],
+            ["Biochemistry", "Systems Biology"]
+        ]
+    }
+    
+    for dept, sequences in core_sequences.items():
+        for sequence in sequences:
+            for i in range(len(sequence) - 1):
+                # Find the prerequisite course
+                prereq_name = sequence[i]
+                prereq_courses = [c for c in courses 
+                                if c["department"] == dept and 
+                                prereq_name.lower() in c["name"].lower()]
+                
+                # Find the target course
+                target_name = sequence[i + 1]
+                target_courses = [c for c in courses 
+                                if c["department"] == dept and 
+                                target_name.lower() in c["name"].lower()]
+                
+                if prereq_courses and target_courses:
+                    prereq = prereq_courses[0]
+                    target = target_courses[0]
+                    
+                    prerequisites.append({
+                        "source": prereq["id"],
+                        "target": target["id"],
+                        "strength": "Required",
+                        "minGrade": "C"
+                    })
+    
+    # Add additional prerequisites based on course level
     for course in courses:
         dept = course["department"]
         level = course["level"]
@@ -744,8 +730,6 @@ def generate_prerequisites(courses):
                 num_prereqs = random.randint(1, 2)
             elif level <= 400:
                 num_prereqs = random.randint(1, 3)
-            else:  # Graduate
-                num_prereqs = random.randint(2, MAX_PREREQS_PER_COURSE)
                 
             num_prereqs = min(num_prereqs, MAX_PREREQS_PER_COURSE)
             
@@ -757,11 +741,10 @@ def generate_prerequisites(courses):
             
             # If we don't have enough potential prerequisites, look at other departments
             if len(potential_prereqs) < num_prereqs:
-                for d in DEPARTMENTS:
-                    if d != dept:
-                        for l in range(100, level, 100):
-                            if (d, l) in by_dept_level:
-                                potential_prereqs.extend(by_dept_level[(d, l)])
+                other_dept = "Biology" if dept == "Computer Science" else "Computer Science"
+                for l in range(100, level, 100):
+                    if (other_dept, l) in by_dept_level:
+                        potential_prereqs.extend(by_dept_level[(other_dept, l)])
             
             # If we still don't have enough, reduce number of prerequisites
             num_prereqs = min(num_prereqs, len(potential_prereqs))
@@ -985,6 +968,11 @@ def generate_student_course_history(students, courses, terms, prerequisites):
     now = datetime.datetime.now()
     current_term = get_term_by_date(now)
     
+    # Find current term object
+    current_term_obj = next((t for t in terms if t["id"] == current_term), None)
+    if not current_term_obj:
+        current_term_obj = terms[-1]  # Use last term if current not found
+    
     for student in students:
         # Determine how many courses this student has taken
         enrollment_date = datetime.datetime.strptime(student["enrollmentDate"], "%Y-%m-%d")
@@ -1035,53 +1023,56 @@ def generate_student_course_history(students, courses, terms, prerequisites):
                 taken_courses.add(course["id"])
                 
                 # If this is the current term, they're enrolled
-                if term["id"] == current_term:
+                if term["id"] == current_term_obj["id"]:
                     enrolled_courses.append({
                         "studentId": student["id"],
-                        "courseId": course["id"]
+                        "courseId": course["id"],
+                        "term": term["id"]
                     })
                     continue
                 
-                # Generate grade
-                grade = weighted_choice(GRADE_DISTRIBUTION)
-                
-                # Generate difficulty rating (influenced by learning style match)
-                student_style = student["learningStyle"]
-                base_difficulty = course["avgDifficulty"]
-                
-                # Adjust difficulty based on learning style match
-                style_match_modifier = 0
-                if student_style == "Visual" and "visualLearnerSuccess" in course:
-                    style_match_modifier = (course["visualLearnerSuccess"] - 0.8) * 2
-                elif student_style == "Auditory" and "auditoryLearnerSuccess" in course:
-                    style_match_modifier = (course["auditoryLearnerSuccess"] - 0.8) * 2
-                elif student_style == "Kinesthetic" and "kinestheticLearnerSuccess" in course:
-                    style_match_modifier = (course["kinestheticLearnerSuccess"] - 0.8) * 2
-                elif student_style == "Reading-Writing" and "readingLearnerSuccess" in course:
-                    style_match_modifier = (course["readingLearnerSuccess"] - 0.8) * 2
-                
-                perceived_difficulty = max(1, min(5, round(base_difficulty - style_match_modifier)))
-                
-                # Time spent (hours per week)
-                avg_time = course["avgTimeCommitment"]
-                time_spent = max(1, int(avg_time * random.uniform(0.7, 1.3)))
-                
-                # Instruction mode
-                instruction_mode = random.choice(course["instructionModes"])
-                
-                # Enjoyment (boolean)
-                enjoyment = grade in ["A", "A-", "B+", "B"] and perceived_difficulty <= 4
-                
-                completed_courses.append({
-                    "studentId": student["id"],
-                    "courseId": course["id"],
-                    "term": term["id"],
-                    "grade": grade,
-                    "difficulty": perceived_difficulty,
-                    "timeSpent": time_spent,
-                    "instructionMode": instruction_mode,
-                    "enjoyment": enjoyment
-                })
+                # For past terms, generate completion record
+                if datetime.datetime.strptime(term["endDate"], "%Y-%m-%d") < now:
+                    # Generate grade
+                    grade = weighted_choice(GRADE_DISTRIBUTION)
+                    
+                    # Generate difficulty rating (influenced by learning style match)
+                    student_style = student["learningStyle"]
+                    base_difficulty = course["avgDifficulty"]
+                    
+                    # Adjust difficulty based on learning style match
+                    style_match_modifier = 0
+                    if student_style == "Visual" and "visualLearnerSuccess" in course:
+                        style_match_modifier = (course["visualLearnerSuccess"] - 0.8) * 2
+                    elif student_style == "Auditory" and "auditoryLearnerSuccess" in course:
+                        style_match_modifier = (course["auditoryLearnerSuccess"] - 0.8) * 2
+                    elif student_style == "Kinesthetic" and "kinestheticLearnerSuccess" in course:
+                        style_match_modifier = (course["kinestheticLearnerSuccess"] - 0.8) * 2
+                    elif student_style == "Reading-Writing" and "readingLearnerSuccess" in course:
+                        style_match_modifier = (course["readingLearnerSuccess"] - 0.8) * 2
+                    
+                    perceived_difficulty = max(1, min(5, round(base_difficulty - style_match_modifier)))
+                    
+                    # Time spent (hours per week)
+                    avg_time = course["avgTimeCommitment"]
+                    time_spent = max(1, int(avg_time * random.uniform(0.7, 1.3)))
+                    
+                    # Instruction mode
+                    instruction_mode = random.choice(course["instructionModes"])
+                    
+                    # Enjoyment (boolean)
+                    enjoyment = grade in ["A", "A-", "B+", "B"] and perceived_difficulty <= 4
+                    
+                    completed_courses.append({
+                        "studentId": student["id"],
+                        "courseId": course["id"],
+                        "term": term["id"],
+                        "grade": grade,
+                        "difficulty": perceived_difficulty,
+                        "timeSpent": time_spent,
+                        "instructionMode": instruction_mode,
+                        "enjoyment": enjoyment
+                    })
     
     return completed_courses, enrolled_courses
 
@@ -1192,6 +1183,229 @@ def generate_student_similarity(students, completed_courses):
                     })
     
     return learning_style_similarity, performance_similarity
+
+def generate_textbooks(courses):
+    """
+    Generate textbooks for courses with realistic metadata.
+    """
+    textbooks = []
+    course_textbooks = []
+    
+    # Define textbook categories and their characteristics
+    textbook_categories = {
+        "Computer Science": {
+            "Programming": {
+                "publishers": ["O'Reilly", "Addison-Wesley", "Prentice Hall", "Manning"],
+                "price_range": (40, 120),
+                "avg_pages": 800,
+                "page_variance": 200
+            },
+            "Theory": {
+                "publishers": ["Springer", "MIT Press", "Cambridge University Press"],
+                "price_range": (60, 150),
+                "avg_pages": 600,
+                "page_variance": 150
+            },
+            "Systems": {
+                "publishers": ["Pearson", "McGraw-Hill", "Wiley"],
+                "price_range": (50, 130),
+                "avg_pages": 700,
+                "page_variance": 180
+            }
+        },
+        "Biology": {
+            "General": {
+                "publishers": ["Pearson", "McGraw-Hill", "Wiley", "Cengage"],
+                "price_range": (80, 200),
+                "avg_pages": 1000,
+                "page_variance": 250
+            },
+            "Specialized": {
+                "publishers": ["Springer", "Elsevier", "Oxford University Press"],
+                "price_range": (70, 180),
+                "avg_pages": 800,
+                "page_variance": 200
+            },
+            "Lab": {
+                "publishers": ["Pearson", "McGraw-Hill", "Cengage"],
+                "price_range": (40, 100),
+                "avg_pages": 400,
+                "page_variance": 100
+            }
+        }
+    }
+    
+    # Generate textbooks for each course
+    for course in courses:
+        dept = course["department"]
+        level = course["level"]
+        
+        # Determine number of textbooks (1-3 per course)
+        num_textbooks = random.choices([1, 2, 3], weights=[0.5, 0.3, 0.2])[0]
+        
+        # Determine course category based on name and level
+        course_category = None
+        if dept == "Computer Science":
+            if "Programming" in course["name"] or "Software" in course["name"]:
+                course_category = "Programming"
+            elif "Theory" in course["name"] or "Algorithms" in course["name"]:
+                course_category = "Theory"
+            else:
+                course_category = "Systems"
+        else:  # Biology
+            if "Lab" in course["name"] or "Practical" in course["name"]:
+                course_category = "Lab"
+            elif level <= 200:
+                course_category = "General"
+            else:
+                course_category = "Specialized"
+        
+        # Get category characteristics
+        cat_info = textbook_categories[dept][course_category]
+        
+        # Generate textbooks for this course
+        for i in range(num_textbooks):
+            # Generate unique textbook ID
+            textbook_id = f"TXT-{dept[:3]}-{level}-{i+1}"
+            
+            # Generate realistic textbook name
+            if i == 0:  # Primary textbook
+                if level <= 200:
+                    name = f"Introduction to {course['name']}"
+                else:
+                    name = f"Advanced {course['name']}"
+            else:  # Supplementary textbooks
+                name = f"{course['name']}: {random.choice(['A Comprehensive Guide', 'Principles and Applications', 'Theory and Practice', 'Case Studies', 'Problem Solving'])}"
+            
+            # Generate metadata
+            publisher = random.choice(cat_info["publishers"])
+            price = round(random.uniform(*cat_info["price_range"]), 2)
+            pages = int(random.gauss(cat_info["avg_pages"], cat_info["page_variance"]))
+            pages = max(100, min(2000, pages))  # Ensure reasonable page count
+            
+            # Generate edition (1st-5th)
+            edition = random.randint(1, 5)
+            
+            # Generate publication year (more recent for higher levels)
+            base_year = 2020 - (level // 100)  # Higher level = newer books
+            pub_year = random.randint(base_year, 2023)
+            
+            # Generate ISBN
+            isbn = f"978-{random.randint(0,9)}{random.randint(0,9)}{random.randint(0,9)}-{random.randint(0,9)}{random.randint(0,9)}{random.randint(0,9)}-{random.randint(0,9)}"
+            
+            textbook = {
+                "id": textbook_id,
+                "name": name,
+                "publisher": publisher,
+                "price": price,
+                "pages": pages,
+                "edition": edition,
+                "publicationYear": pub_year,
+                "isbn": isbn,
+                "category": course_category
+            }
+            
+            textbooks.append(textbook)
+            
+            # Create course-textbook relationship
+            course_textbooks.append({
+                "courseId": course["id"],
+                "textbookId": textbook_id,
+                "isRequired": i == 0,  # First textbook is required
+                "recommendedOrder": i + 1  # Order in which textbooks are recommended
+            })
+    
+    return textbooks, course_textbooks
+
+def generate_textbook_interactions(students, courses, textbooks, course_textbooks, terms, completed_courses):
+    """Generate realistic textbook interaction patterns."""
+    interactions = []
+    page_views = []
+    
+    # Create lookup for completed courses by student
+    student_courses = defaultdict(list)
+    for comp in completed_courses:
+        student_courses[comp["studentId"]].append(comp)
+    
+    # Create lookup for course textbooks
+    course_text_lookup = defaultdict(list)
+    for ct in course_textbooks:
+        course_text_lookup[ct["courseId"]].append(
+            next(t for t in textbooks if t["id"] == ct["textbookId"])
+        )
+    
+    for student in students:
+        # Get all completed courses for this student
+        student_completed = student_courses[student["id"]]
+        
+        for comp in student_completed:
+            # Get textbooks for this course
+            course_texts = course_text_lookup[comp["courseId"]]
+            if not course_texts:
+                continue
+                
+            # Generate interaction patterns based on student's learning style
+            if student["learningStyle"] == "Visual":
+                # Visual learners tend to read more frequently but for shorter durations
+                num_sessions = random.randint(15, 25)
+                avg_duration = random.randint(2, 5)
+            elif student["learningStyle"] == "Auditory":
+                # Auditory learners might read less frequently but for longer durations
+                num_sessions = random.randint(8, 15)
+                avg_duration = random.randint(5, 10)
+            else:  # Reading-Writing or Kinesthetic
+                # Reading/writing learners have consistent reading patterns
+                num_sessions = random.randint(12, 20)
+                avg_duration = random.randint(3, 7)
+            
+            # Get the term dates for this completed course
+            term = next(t for t in terms if t["id"] == comp["term"])
+            term_start = datetime.datetime.strptime(term["startDate"], "%Y-%m-%d")
+            term_end = datetime.datetime.strptime(term["endDate"], "%Y-%m-%d")
+            
+            # Generate page views for each session
+            for session in range(num_sessions):
+                # Randomly select a textbook for this session
+                textbook = random.choice(course_texts)
+                num_pages = random.randint(5, 15)
+                
+                # Generate timestamps for this session
+                session_start = term_start + datetime.timedelta(
+                    days=random.randint(0, (term_end - term_start).days),
+                    hours=random.randint(8, 22)  # During reasonable hours
+                )
+                
+                for page in range(num_pages):
+                    # Add some randomness to page view duration (in minutes)
+                    duration = random.randint(avg_duration - 1, avg_duration + 1)
+                    
+                    # Generate timestamp for this page view
+                    timestamp = session_start + datetime.timedelta(
+                        minutes=page * duration,
+                        seconds=random.randint(0, 59)
+                    )
+                    
+                    # Create page view record
+                    page_views.append({
+                        "studentId": student["id"],
+                        "textbookId": textbook["id"],
+                        "courseId": comp["courseId"],
+                        "pageNumber": random.randint(1, textbook["pages"]),
+                        "timestamp": timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+                        "duration": duration
+                    })
+                    
+                    # Create interaction record
+                    interactions.append({
+                        "studentId": student["id"],
+                        "textbookId": textbook["id"],
+                        "courseId": comp["courseId"],
+                        "interactionType": random.choice(["read", "highlight", "note"]),
+                        "timestamp": timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+                        "duration": duration
+                    })
+    
+    return interactions, page_views
 
 # =============================================================================
 #                           EXPORT FUNCTIONS
@@ -1790,52 +2004,197 @@ def export_to_csv(data, output_dir):
                             term["id"],
                             "OFFERED_IN"
                         ])
+    
+    # Export textbooks
+    with open(os.path.join(output_dir, "textbooks.csv"), "w", newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            "id:ID(Textbook)", "name", "publisher", "price:float", "pages:int",
+            "edition:int", "publicationYear:int", "isbn", "category"
+        ])
+        
+        for textbook in data["textbooks"]:
+            writer.writerow([
+                textbook["id"],
+                textbook["name"],
+                textbook["publisher"],
+                textbook["price"],
+                textbook["pages"],
+                textbook["edition"],
+                textbook["publicationYear"],
+                textbook["isbn"],
+                textbook["category"]
+            ])
+    
+    # Export course-textbook relationships
+    with open(os.path.join(output_dir, "course_textbooks.csv"), "w", newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            ":START_ID(Course)", ":END_ID(Textbook)", ":TYPE",
+            "isRequired:boolean", "recommendedOrder:int"
+        ])
+        
+        for rel in data["course_textbooks"]:
+            writer.writerow([
+                rel["courseId"],
+                rel["textbookId"],
+                "REQUIRES" if rel["isRequired"] else "RECOMMENDS",
+                rel["isRequired"],
+                rel["recommendedOrder"]
+            ])
+    
+    # Export textbook page views
+    with open(os.path.join(output_dir, "page_views.csv"), "w", newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            ":START_ID(Student)", ":END_ID(Textbook)", ":TYPE",
+            "courseId", "pageNumber:int", "timestamp", "duration:int"
+        ])
+        
+        for view in data["page_views"]:
+            writer.writerow([
+                view["studentId"],
+                view["textbookId"],
+                "VIEWED_PAGE",
+                view["courseId"],
+                view["pageNumber"],
+                view["timestamp"],
+                view["duration"]
+            ])
+    
+    # Export textbook interactions
+    with open(os.path.join(output_dir, "textbook_interactions.csv"), "w", newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            ":START_ID(Student)", ":END_ID(Textbook)", ":TYPE",
+            "courseId", "interactionType", "timestamp", "duration:int"
+        ])
+        
+        for interaction in data["textbook_interactions"]:
+            writer.writerow([
+                interaction["studentId"],
+                interaction["textbookId"],
+                "INTERACTED_WITH",
+                interaction["courseId"],
+                interaction["interactionType"],
+                interaction["timestamp"],
+                interaction["duration"]
+            ])
 
 def generate_neo4j_import_script(output_dir):
     """
     Generate a shell script to import the CSV files into Neo4j.
+    The script is idempotent - it will destroy and recreate the target database.
     """
     script_path = os.path.join(output_dir, "import_to_neo4j.sh")
     
     with open(script_path, "w") as f:
         f.write("""#!/bin/bash
 # This script imports the generated CSV files into Neo4j.
+# This script is idempotent - it will destroy and recreate the target database.
 # Make sure Neo4j is stopped before running this script.
 
-# Path to the Neo4j installation
-NEO4J_HOME="$HOME/Library/Application Support/Neo4j Desktop/Application/relate-data/dbmss/dbms-d5734b20-04d6-49b4-9bfc-561bb86f6dfd"
+# Exit on error
+set -e
 
-# Path to the import directory
-IMPORT_DIR="$(pwd)"
+# Path to the Neo4j installation (with proper escaping)
+NEO4J_HOME="${HOME}/Library/Application Support/Neo4j Desktop/Application/relate-data/dbmss/dbms-b3818c40-56e6-4a47-a4e8-e8183cecc545"
 
-# Run the import command
+# Database name
+DB_NAME="umbc-degree-pathways"
+
+# Path to the import directory (absolute path)
+IMPORT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Check if Neo4j is running
+if pgrep -x "neo4j" > /dev/null; then
+    echo "Error: Neo4j appears to be running. Please stop Neo4j before running this import script."
+    exit 1
+fi
+
+# Check if import directory exists and contains required files
+if [ ! -d "$IMPORT_DIR" ]; then
+    echo "Error: Import directory not found: $IMPORT_DIR"
+    exit 1
+fi
+
+# Check for required CSV files
+required_files=(
+    "students.csv" "faculty.csv" "courses.csv" "degrees.csv" "terms.csv"
+    "requirement_groups.csv" "textbooks.csv" "prerequisites.csv" "leads_to.csv"
+    "course_similarity_content.csv" "course_similarity_difficulty.csv"
+    "student_degree.csv" "teaching.csv" "completed_courses.csv"
+    "enrolled_courses.csv" "learning_style_similarity.csv"
+    "performance_similarity.csv" "requirement_degree.csv"
+    "course_requirement.csv" "course_term.csv" "course_textbooks.csv"
+    "page_views.csv" "textbook_interactions.csv"
+)
+
+for file in "${required_files[@]}"; do
+    if [ ! -f "$IMPORT_DIR/$file" ]; then
+        echo "Error: Required file not found: $file"
+        exit 1
+    fi
+done
+
+echo "Starting import process..."
+echo "Using Neo4j installation at: $NEO4J_HOME"
+echo "Importing from directory: $IMPORT_DIR"
+echo "Target database name: $DB_NAME"
+
+# Clean up any existing database files
+DB_PATH="$NEO4J_HOME/data/databases/$DB_NAME"
+if [ -d "$DB_PATH" ]; then
+    echo "Cleaning up existing database directory..."
+    rm -rf "$DB_PATH"
+fi
+
+echo "Creating fresh database..."
+
+# Run the import command with proper quoting
 "$NEO4J_HOME/bin/neo4j-admin" database import full \\
-  --nodes=Student="$IMPORT_DIR/students.csv" \\
-  --nodes=Faculty="$IMPORT_DIR/faculty.csv" \\
-  --nodes=Course="$IMPORT_DIR/courses.csv" \\
-  --nodes=Degree="$IMPORT_DIR/degrees.csv" \\
-  --nodes=Term="$IMPORT_DIR/terms.csv" \\
-  --nodes=RequirementGroup="$IMPORT_DIR/requirement_groups.csv" \\
-  --relationships=PREREQUISITE_FOR="$IMPORT_DIR/prerequisites.csv" \\
-  --relationships=LEADS_TO="$IMPORT_DIR/leads_to.csv" \\
-  --relationships=SIMILAR_CONTENT="$IMPORT_DIR/course_similarity_content.csv" \\
-  --relationships=SIMILAR_DIFFICULTY="$IMPORT_DIR/course_similarity_difficulty.csv" \\
-  --relationships=PURSUING="$IMPORT_DIR/student_degree.csv" \\
-  --relationships=TEACHES="$IMPORT_DIR/teaching.csv" \\
-  --relationships=COMPLETED="$IMPORT_DIR/completed_courses.csv" \\
-  --relationships=ENROLLED_IN="$IMPORT_DIR/enrolled_courses.csv" \\
-  --relationships=SIMILAR_LEARNING_STYLE="$IMPORT_DIR/learning_style_similarity.csv" \\
-  --relationships=SIMILAR_PERFORMANCE="$IMPORT_DIR/performance_similarity.csv" \\
-  --relationships=PART_OF="$IMPORT_DIR/requirement_degree.csv" \\
-  --relationships=FULFILLS="$IMPORT_DIR/course_requirement.csv" \\
-  --relationships=OFFERED_IN="$IMPORT_DIR/course_term.csv" \\
+  --nodes="Student=$IMPORT_DIR/students.csv" \\
+  --nodes="Faculty=$IMPORT_DIR/faculty.csv" \\
+  --nodes="Course=$IMPORT_DIR/courses.csv" \\
+  --nodes="Degree=$IMPORT_DIR/degrees.csv" \\
+  --nodes="Term=$IMPORT_DIR/terms.csv" \\
+  --nodes="RequirementGroup=$IMPORT_DIR/requirement_groups.csv" \\
+  --nodes="Textbook=$IMPORT_DIR/textbooks.csv" \\
+  --relationships="PREREQUISITE_FOR=$IMPORT_DIR/prerequisites.csv" \\
+  --relationships="LEADS_TO=$IMPORT_DIR/leads_to.csv" \\
+  --relationships="SIMILAR_CONTENT=$IMPORT_DIR/course_similarity_content.csv" \\
+  --relationships="SIMILAR_DIFFICULTY=$IMPORT_DIR/course_similarity_difficulty.csv" \\
+  --relationships="PURSUING=$IMPORT_DIR/student_degree.csv" \\
+  --relationships="TEACHES=$IMPORT_DIR/teaching.csv" \\
+  --relationships="COMPLETED=$IMPORT_DIR/completed_courses.csv" \\
+  --relationships="ENROLLED_IN=$IMPORT_DIR/enrolled_courses.csv" \\
+  --relationships="SIMILAR_LEARNING_STYLE=$IMPORT_DIR/learning_style_similarity.csv" \\
+  --relationships="SIMILAR_PERFORMANCE=$IMPORT_DIR/performance_similarity.csv" \\
+  --relationships="PART_OF=$IMPORT_DIR/requirement_degree.csv" \\
+  --relationships="FULFILLS=$IMPORT_DIR/course_requirement.csv" \\
+  --relationships="OFFERED_IN=$IMPORT_DIR/course_term.csv" \\
+  --relationships="REQUIRES,RECOMMENDS=$IMPORT_DIR/course_textbooks.csv" \\
+  --relationships="VIEWED_PAGE=$IMPORT_DIR/page_views.csv" \\
+  --relationships="INTERACTED_WITH=$IMPORT_DIR/textbook_interactions.csv" \\
   --delimiter="," \\
   --array-delimiter=";" \\
   --ignore-empty-strings=true \\
   --ignore-extra-columns=true \\
-  degree-pathways
+  --skip-bad-relationships=true \\
+  --skip-duplicate-nodes=true \\
+  --high-parallel-io=on \\
+  --normalize-types=true \\
+  --overwrite-destination=true \\
+  "$DB_NAME"
 
-echo "Import complete. To use the database, edit neo4j.conf to set dbms.active_database=degree-pathways"
+if [ $? -eq 0 ]; then
+    echo "Import completed successfully!"
+    echo "To use the database, edit neo4j.conf to set dbms.default_database=$DB_NAME"
+    echo "Then restart Neo4j."
+else
+    echo "Import failed. Check the error messages above for details."
+    exit 1
+fi
 """)
     
     # Make the script executable
@@ -2136,6 +2495,9 @@ def main():
     print("Generating courses...")
     courses, dept_courses = generate_courses(faculty_by_dept)
     
+    print("Generating textbooks...")
+    textbooks, course_textbooks = generate_textbooks(courses)
+    
     print("Generating degrees and requirement groups...")
     degrees, requirement_groups = generate_degrees(dept_courses)
     
@@ -2157,6 +2519,11 @@ def main():
     print("Generating student course history...")
     completed_courses, enrolled_courses = generate_student_course_history(students, courses, terms, prerequisites)
     
+    print("Generating textbook interactions...")
+    textbook_interactions, page_views = generate_textbook_interactions(
+        students, courses, textbooks, course_textbooks, terms, completed_courses
+    )
+    
     print("Generating student similarity...")
     learning_style_similarity, performance_similarity = generate_student_similarity(students, completed_courses)
     
@@ -2165,6 +2532,10 @@ def main():
         "students": students,
         "faculty": faculty,
         "courses": courses,
+        "textbooks": textbooks,
+        "course_textbooks": course_textbooks,
+        "textbook_interactions": textbook_interactions,
+        "page_views": page_views,
         "degrees": degrees,
         "terms": terms,
         "requirement_groups": requirement_groups,
@@ -2206,6 +2577,9 @@ def main():
     print(f"- {len(students)} students")
     print(f"- {len(courses)} courses")
     print(f"- {len(faculty)} faculty")
+    print(f"- {len(textbooks)} textbooks")
+    print(f"- {len(textbook_interactions)} textbook interactions")
+    print(f"- {len(page_views)} page views")
     print(f"- {len(degrees)} degree programs")
     print(f"- {len(requirement_groups)} requirement groups")
     print(f"- {len(terms)} academic terms")
