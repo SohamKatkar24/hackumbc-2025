@@ -2,7 +2,7 @@
 
 ## Welcome HackUMBC Participants!
 
-Welcome to the Neo4j Academic Analytics track! Your mission is to leverage this rich synthetic dataset of UMBC student data to create something amazing. The possibilities are endless:
+Welcome to the HackUMBC Data Science track! Your mission is to leverage this rich synthetic dataset of UMBC student data to create something amazing. The possibilities are endless:
 
 ### **Project Ideas & Directions**
 
@@ -31,7 +31,7 @@ Want to take the data in a new direction? Modify `generate_synthetic_dataset.py`
 - Build a recommendation engine for course selection
 - Create a chatbot that queries the graph to answer student questions
 
-### 🎯 **Judging Criteria Considerations**
+### **Judging Criteria Considerations**
 Your project could excel in:
 - **Innovation**: Novel use of graph relationships (similarity networks, prerequisite chains)
 - **Impact**: Solving real problems for students, faculty, or administrators
@@ -228,15 +228,9 @@ MATCH (n) RETURN labels(n)[0] as Label, count(n) as Count;
 // Textbook: 80-100
 ```
 
-## Step 5: Load Browser Guide (Optional)
+## Step 5: View Browser Guide
 
-1. In Neo4j Browser, click the folder icon (top left)
-2. Drag and drop `umbc_data/umbc_guide.html`
-3. Or paste this URL in the browser command line:
-```
-:play http://localhost:8000/umbc_guide.html
-```
-(You'll need to serve the file locally with `python -m http.server` in the umbc_data directory)
+1. Open the HTML file `umbc_data/umbc_guide.html` for additional insights.
 
 ## Data Model
 
