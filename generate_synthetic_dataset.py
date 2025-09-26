@@ -2292,7 +2292,7 @@ CALL db.schema.visualization
             <pre class="code runnable">
 // Find optimal next courses based on learning style and prerequisites
 MATCH (student:Student)-[:PURSUING]->(degree:Degree)
-WHERE student.id = 'AB12345' // Replace with a real campus ID
+WHERE student.id = 'AB12345' // Replace with a real campus ID from the dataset
 MATCH (term:Term {id: 'Fall2023'}) // Update with appropriate term
 MATCH (course:Course)-[:OFFERED_IN]->(term)
 MATCH (course)-[:FULFILLS]->(:RequirementGroup)-[:PART_OF]->(degree)
