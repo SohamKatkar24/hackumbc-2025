@@ -918,19 +918,6 @@ WITH '2023-09-15 14:30:00' AS ts
 RETURN datetime(replace(ts, ' ', 'T')) AS converted_datetime
 ```
 
-#### 6. Browser Guide Not Loading
-
-**Problem**: ":play" command doesn't work with local file
-**Solution**:
-```bash
-# Serve the file locally
-cd umbc_data
-python3 -m http.server 8000
-
-# Then in Neo4j Browser:
-:play http://localhost:8000/umbc_guide.html
-```
-
 ### Getting Help
 
 1. **Neo4j Documentation**: https://neo4j.com/docs/
