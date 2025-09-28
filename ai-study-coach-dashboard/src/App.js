@@ -98,7 +98,7 @@ function App() {
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center">
               <Brain className="h-8 w-8 text-blue-600 mr-3" />
-              <h1 className="text-2xl font-bold text-gray-900">AI Study Coach</h1>
+              <h1 className="text-2xl font-bold text-gray-900">PeerAnalytica</h1>
               <span className="ml-3 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
                 HackUMBC 2025
               </span>
