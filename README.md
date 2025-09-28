@@ -37,7 +37,7 @@ The AI Study Coach is a full-stack application that analyzes academic data using
                               ▼
                        ┌─────────────────┐
                        │   AI Model      │
-                       │   (DialoGPT)    │
+                       │   (Ollama)    │
                        └─────────────────┘
 ```
 
@@ -49,7 +49,7 @@ The AI Study Coach is a full-stack application that analyzes academic data using
 - **Behavioral Pattern Analysis**: Identifies differences in study approaches between high and low performers
 
 ### AI Integration
-- **Local Language Model**: Uses DialoGPT for generating contextual study advice
+- **Local Language Model**: Uses Ollama for generating contextual study advice
 - **Personalized Recommendations**: Tailors advice based on learning style and performance gaps
 - **Fallback Strategies**: Provides rule-based recommendations when AI is unavailable
 
@@ -65,7 +65,7 @@ The AI Study Coach is a full-stack application that analyzes academic data using
 - **Python 3.8+**: Core programming language
 - **Flask**: Web framework for API endpoints
 - **Neo4j**: Graph database for storing student relationships
-- **Transformers**: Hugging Face library for AI model integration
+- **Ollama**: Local AI model server for generating contextual recommendations
 - **NumPy/Pandas**: Data processing and analysis
 
 ### Frontend
@@ -133,6 +133,15 @@ docker run -d \
 # Wait for startup, then access: http://localhost:7474
 # Login: neo4j / yourpassword
 ```
+### Step 2.5: Set Up Ollama
+```bash
+# Install Ollama from https://ollama.ai/download
+# Pull a lightweight model
+ollama pull tinyllama
+
+# Test Ollama is working
+ollama run tinyllama "Hello"
+```
 
 ### Step 3: Generate and Import Dataset
 ```bash
@@ -153,7 +162,7 @@ python automated_import.py
 ### Step 4: Set Up Backend API
 ```bash
 # Install additional backend dependencies
-pip install flask flask-cors transformers torch
+pip install flask flask-cors requests
 
 # Start Flask API
 cd backend
@@ -270,9 +279,9 @@ ORDER BY avgGPA DESC
 ## AI Model Integration
 
 ### Model Selection
-- **Primary**: DialoGPT-small (Microsoft)
-- **Rationale**: Conversational AI optimized for generating contextual responses
-- **Local Processing**: No external API dependencies, ensuring privacy
+- **Primary**: Ollama with TinyLlama
+- **Rationale**: Local AI server providing better contextual understanding than traditional models
+- **Local Processing**: No external API dependencies, ensuring privacy and flexibility
 
 ### Recommendation Generation Process
 1. **Data Collection**: Query Neo4j for similar student patterns
@@ -287,7 +296,7 @@ If AI model fails, system provides rule-based recommendations using predefined t
 ## Future Enhancements
 
 ### Technical Improvements
-- **Ollama Integration**: Replace DialoGPT with larger, more capable local models
+- **Model Upgrades**: Upgrade to larger Ollama models (Llama2, Mistral) as system resources allow
 - **Advanced Analytics**: Implement graph algorithms for deeper pattern analysis
 - **Real-time Updates**: WebSocket connections for live recommendation updates
 - **Model Fine-tuning**: Train custom models on educational data

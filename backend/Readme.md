@@ -66,8 +66,7 @@ Flask API Server (Port 5000)
 - **Flask 2.3.3**: Web framework
 - **Flask-CORS 4.0.0**: Cross-origin resource sharing
 - **neo4j 5.12.0**: Database driver
-- **transformers 4.35.0**: AI model integration
-- **torch 2.0.1**: PyTorch for model inference
+- **requests 2.31.0**: HTTP client for Ollama API communication
 
 ### Data Processing
 - **numpy 1.24.3**: Numerical computations
@@ -129,10 +128,10 @@ curl -X POST http://localhost:5000/api/analyze \
 ## AI Model Integration
 
 ### Model Configuration
-- **Model**: Microsoft DialoGPT-small
+- **Model**: Ollama with TinyLlama
 - **Purpose**: Generate contextual study advice
-- **Processing**: Local inference (no external APIs)
-- **Fallback**: Rule-based recommendations if AI fails
+- **Processing**: Local inference via Ollama API (port 11434)
+- **Fallback**: Rule-based recommendations if Ollama unavailable
 
 ### Recommendation Process
 1. Query Neo4j for similar students
@@ -220,10 +219,11 @@ Solution: Verify Neo4j is running and credentials are correct
 Check: docker ps | grep neo4j
 ```
 
-**AI Model Loading Error**
+**Ollama Connection Error**
 ```
-Solution: Ensure sufficient RAM (2GB+) for DialoGPT model
-Alternative: Use smaller model or increase system memory
+Solution: Ensure Ollama is running (ollama serve)
+Check: curl http://localhost:11434/api/tags
+Alternative: Restart Ollama service
 ```
 
 **CORS Issues**
